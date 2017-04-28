@@ -1,6 +1,8 @@
+#pragma config(UART_Usage, UART2, uartVEXLCD, baudRate19200, IOPins, None, None)
 #pragma config(Sensor, in1,    Right,          sensorLineFollower)
 #pragma config(Sensor, in2,    Middle,         sensorLineFollower)
 #pragma config(Sensor, in3,    Left,           sensorLineFollower)
+#pragma config(Sensor, dgtl1,  Encoder,        sensorQuadEncoder)
 #pragma config(Motor,  port1,           rightMotor,    tmotorVex393_HBridge, openLoop, reversed)
 #pragma config(Motor,  port2,           armMotor,      tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port3,           liftMotor1,    tmotorVex393_MC29, openLoop)
@@ -157,6 +159,16 @@ float speedMod = 1;
 
   while(true)
   {
+  clearLCDLine(0);                    // Clear line 1 (0) of the LCD
+  clearLCDLine(1);                    // Clear line 2 (1) of the LCD
+  displayLCDPos(0,0);                 // Set the LCD cursor to Line 'l' and Index 'i'
+  string value;
+  sprintf(value,"%1.2f%c",(sensorValue(Encoder)));
+  displayNextLCDString(value);   // Display "Hello from"
+
+  bLCDBacklight = true;               // Turn on LCD Backlight
+
+
     //Driving Motor Control
     /*motor[leftMotor] = vexRTCh3] / 2;//old direct drive
     motor[rightMotor] = vexRT[Ch2] / 2;*/
