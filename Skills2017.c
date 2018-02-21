@@ -86,7 +86,13 @@ int threshold = 55;
 	motor[armMotor] = 0;
 	motor[armMotor1] = 0;
 
-	while(SensorValue(Middle) > 40)
+	motor[leftMotor] = 127;
+	motor[rightMotor] = 127;
+	wait1Msec(2000);
+	motor[leftMotor] = 127;
+	motor[rightMotor] = 127;
+
+/*	while(SensorValue(Middle) > 40)
 	{
 		motor[leftMotor] = 120;
    	motor[rightMotor] = 120;
@@ -115,6 +121,7 @@ int threshold = 55;
       motor[leftMotor]  = 0;
       motor[rightMotor] = 63;
     }
+    */
 //} end encoder count down
   // Remove this function call once you have "real" code.
   //AutonomousCodePlaceholderForTesting();
@@ -163,13 +170,13 @@ float speedMod = 1;
 
     if(vexRT[Btn6U])
     {
-    	speedMod = 0.5;
+    	speedMod = 0.7;
     }
     else
     {
     	speedMod = 1;
     }
-    if(vexRT[Btn6D])
+    /*if(vexRT[Btn6D])
     {
     	if (abs(vexRT[Ch3])>=abs(vexRT[Ch2]))
     	{
@@ -180,10 +187,10 @@ float speedMod = 1;
     	{
     		motor[leftMotor] = speedMod * vexRT[Ch2];
     		motor[rightMotor] = speedMod * vexRT[Ch2];
-    	}
-  }
-  else
-  {
+    	}*/
+
+  //else
+  //{
 
      if(abs(vexRT[Ch3]) < threshold)         // If the left joystick is greater than or less than the threshold:
     {
@@ -230,20 +237,34 @@ float speedMod = 1;
       motor[armMotor1] = 0;
     }
     //lift control
-   if(vexRT[Btn8D] == 1)
+   if(vexRT[Btn6D] == 1)
     {
-      motor[liftMotor4] = 127;
-      motor[liftMotor1] = 127;
-      motor[liftMotor2] = 127;
-      motor[liftMotor3] = 127;
+      motor[liftMotor4] = 110;
+      motor[liftMotor1] = 110;
+      motor[liftMotor2] = 110;
+      motor[liftMotor3] = 110;
     }
-    else if(vexRT[Btn8U] == 1)
+    else if(vexRT[Btn6U] == 1)
     {
-      motor[liftMotor4] = -127;
-      motor[liftMotor1] = -127;
-      motor[liftMotor2] = -127;
-      motor[liftMotor3] = -127;
+      motor[liftMotor4] = -110;
+      motor[liftMotor1] = -110;
+      motor[liftMotor3] = -110;
+       motor[liftMotor2] = -110;
     }
+    else if (vexRT[Btn7L]==1)
+    {
+    	motor[liftMotor4] = -2;
+      motor[liftMotor1] = -2;
+      motor[liftMotor2] = -2;
+      motor[liftMotor3] = -2;
+  }
+  else if (vexRT[Btn7R]==1)
+    {
+    	motor[liftMotor4] = -5;
+      motor[liftMotor1] = -5;
+      motor[liftMotor2] = -5;
+      motor[liftMotor3] = -5;
+  }
     else
     {
     	motor[liftMotor4] = 0;
@@ -252,6 +273,6 @@ float speedMod = 1;
       motor[liftMotor3] = 0;
       // if lift encoder > 240, set to 40 in order to hold position
     }
-  }
-  }
+
+}
 }
